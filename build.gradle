@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'com.hard'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springframework_version = "5.+"
+    servlet_api_version = "4.+"
+
+    junit_version = "5.+"
+}
+
+dependencies {
+    implementation "org.springframework:spring-webmvc:${springframework_version}"
+    implementation "javax.servlet:javax.servlet-api:${servlet_api_version}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:${junit_version}"
+}
+
+test {
+    useJUnitPlatform()
+}
