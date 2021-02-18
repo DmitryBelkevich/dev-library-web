@@ -44,6 +44,22 @@ public class EntityService {
         this.entities.addAll(entities);
     }
 
+    public void update(long id, Entity entity) {
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity e = iterator.next();
+
+            if (e.getId() == id) {
+                entities.remove(e);
+
+                entity.setId(id);
+                entities.add(entity);
+
+                break;
+            }
+        }
+    }
+
     public void deleteById(long id) {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {

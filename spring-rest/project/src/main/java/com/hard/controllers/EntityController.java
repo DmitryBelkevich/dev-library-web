@@ -113,6 +113,26 @@ public class EntityController {
      * update
      */
 
+    @PutMapping("/{id}")// put || post
+    public ResponseEntity<Entity> update(@PathVariable("id") long id, @RequestBody Entity entity) {
+        HttpStatus httpStatus;
+        Entity e = entityService.getById(id);
+
+        if (e == null) {
+            httpStatus = HttpStatus.NOT_FOUND;
+            entity = null;
+        } else {
+            httpStatus = HttpStatus.OK;
+            entityService.update(id, entity);
+        }
+
+        ResponseEntity responseEntity = ResponseEntity
+                .status(httpStatus)
+                .body(entity);
+
+        return responseEntity;
+    }
+
     /**
      * delete
      */
