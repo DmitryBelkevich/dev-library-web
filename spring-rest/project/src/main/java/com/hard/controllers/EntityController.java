@@ -81,6 +81,34 @@ public class EntityController {
         return responseEntity;
     }
 
+    @PutMapping("")
+    public ResponseEntity<Entity> addCollection(@RequestBody Collection<Entity> entities) {
+        HttpStatus httpStatus;
+        boolean contains = false;
+        for (Entity entity : entities) {
+            Entity e = entityService.getById(entity.getId());
+
+            if (e != null) {
+                contains = true;
+                break;
+            }
+        }
+
+        if (contains) {
+            httpStatus = HttpStatus.CONFLICT;
+            entities = null;
+        } else {
+            httpStatus = HttpStatus.CREATED;
+            entityService.addCollection(entities);
+        }
+
+        ResponseEntity responseEntity = ResponseEntity
+                .status(httpStatus)
+                .body(entities);
+
+        return responseEntity;
+    }
+
     /**
      * update
      */

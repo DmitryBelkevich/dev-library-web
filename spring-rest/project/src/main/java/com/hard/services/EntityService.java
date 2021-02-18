@@ -40,6 +40,10 @@ public class EntityService {
         entities.add(entity);
     }
 
+    public void addCollection(Collection<Entity> entities) {
+        this.entities.addAll(entities);
+    }
+
     public void deleteById(long id) {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
