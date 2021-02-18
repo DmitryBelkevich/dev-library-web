@@ -90,4 +90,33 @@ public class EntityServiceTest {
 
         assertEquals(0, entities.size());
     }
+
+    @Test
+    @DisplayName("delete")
+    public void shouldDelete() {
+        int id = 5;
+        entityService.delete(id);
+
+        Collection<Entity> entities = entityService.getAll();
+
+        assertEquals(9, entities.size());
+
+        Entity entity;
+        for (int i = 1; i <= 4; i++) {
+            entity = entityService.get(i);
+
+            assertEquals(i, entity.getId());
+            assertEquals("Entity " + i, entity.getTitle());
+        }
+
+        entity = entityService.get(id);
+        assertNull(entity);
+
+        for (int i = 6; i <= count; i++) {
+            entity = entityService.get(i);
+
+            assertEquals(i, entity.getId());
+            assertEquals("Entity " + i, entity.getTitle());
+        }
+    }
 }
