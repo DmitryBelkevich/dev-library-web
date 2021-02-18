@@ -9,22 +9,11 @@ import java.util.Iterator;
 public class EntityService {
     private Collection<Entity> entities = new ArrayList<>();
 
-    public EntityService() {
-        for (long i = 1; i <= 5; i++) {
-            Entity entity = new Entity();
-
-            entity.setId(i);
-            entity.setTitle("Entity " + i);
-
-            entities.add(entity);
-        }
-    }
-
     public Collection<Entity> getAll() {
         return entities;
     }
 
-    public Entity getById(long id) {
+    public Entity get(long id) {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
@@ -60,7 +49,16 @@ public class EntityService {
         }
     }
 
-    public void deleteById(long id) {
+    public void updateCollection(Collection<Entity> entities) {
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+
+            // TODO
+        }
+    }
+
+    public void delete(long id) {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
