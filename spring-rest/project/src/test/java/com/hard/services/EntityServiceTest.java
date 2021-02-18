@@ -5,7 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -34,6 +37,17 @@ public class EntityServiceTest {
         Collection<Entity> entities = entityService.getAll();
 
         assertEquals(count, entities.size());
+
+        int i = 1;
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+
+            assertEquals(i, entity.getId());
+            assertEquals("Entity " + i, entity.getTitle());
+
+            i++;
+        }
     }
 
     @Test
