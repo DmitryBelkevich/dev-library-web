@@ -92,6 +92,17 @@ public class EntityServiceTest {
     }
 
     @Test
+    @DisplayName("delete nothing")
+    public void shouldNotDelete() {
+        int id = 0;
+        entityService.delete(id);
+
+        Collection<Entity> entities = entityService.getAll();
+
+        assertEquals(10, entities.size());
+    }
+
+    @Test
     @DisplayName("delete")
     public void shouldDelete() {
         int id = 5;
