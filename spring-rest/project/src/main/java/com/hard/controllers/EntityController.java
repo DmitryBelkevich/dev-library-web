@@ -58,6 +58,30 @@ public class EntityController {
     }
 
     /**
+     * add
+     */
+
+    @PostMapping("")
+    public ResponseEntity<Entity> add(@RequestBody Entity entity) {
+        HttpStatus httpStatus;
+        Entity e = entityService.getById(entity.getId());
+
+        if (e != null) {
+            httpStatus = HttpStatus.CONFLICT;
+            entity = null;
+        } else {
+            httpStatus = HttpStatus.CREATED;
+            entityService.add(entity);
+        }
+
+        ResponseEntity responseEntity = ResponseEntity
+                .status(httpStatus)
+                .body(entity);
+
+        return responseEntity;
+    }
+
+    /**
      * delete
      */
 

@@ -36,6 +36,10 @@ public class EntityService {
         return null;
     }
 
+    public void add(Entity entity) {
+        entities.add(entity);
+    }
+
     public void deleteById(long id) {
         Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
