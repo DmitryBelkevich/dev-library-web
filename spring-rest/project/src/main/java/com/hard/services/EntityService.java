@@ -10,14 +10,14 @@ public class EntityService {
     private Collection<Entity> entities = new ArrayList<>();
 
     public EntityService() {
-//        for (long i = 1; i <= 10; i++) {
-//            Entity entity = new Entity();
-//
-//            entity.setId(i);
-//            entity.setTitle("Entity " + i);
-//
-//            entities.add(entity);
-//        }
+        for (long i = 1; i <= 5; i++) {
+            Entity entity = new Entity();
+
+            entity.setId(i);
+            entity.setTitle("Entity " + i);
+
+            entities.add(entity);
+        }
     }
 
     public Collection<Entity> getAll() {
