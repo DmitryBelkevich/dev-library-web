@@ -104,7 +104,29 @@ public class EntityServiceTest {
     @Test
     @DisplayName("addCollection")
     public void shouldAddCollection() {
+        Collection<Entity> entities1 = new ArrayList();
 
+        for (int i = count + 1; i <= count * 2; i++) {
+            Entity entity = new Entity();
+
+            entity.setId(i);
+            entity.setTitle("Entity " + i);
+
+            entities1.add(entity);
+        }
+
+        entityService.addCollection(entities1);
+
+        Collection<Entity> entities = entityService.getAll();
+
+        assertEquals(count * 2, entities.size());
+
+        for (int i = 1; i <= count * 2; i++) {
+            Entity entity = entityService.get(i);
+
+            assertEquals(i, entity.getId());
+            assertEquals("Entity " + i, entity.getTitle());
+        }
     }
 
     /**
