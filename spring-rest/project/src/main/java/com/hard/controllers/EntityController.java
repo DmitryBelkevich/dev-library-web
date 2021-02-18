@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/entities")
-public class MainController {
+public class EntityController {
     private EntityService entityService = new EntityService();
 
     /**
