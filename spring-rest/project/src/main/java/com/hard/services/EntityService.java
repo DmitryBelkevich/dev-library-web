@@ -63,8 +63,10 @@ public class EntityService {
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
 
-            if (entity.getId() == id)
+            if (entity.getId() == id) {
                 entities.remove(entity);
+                return;
+            }
         }
     }
 
