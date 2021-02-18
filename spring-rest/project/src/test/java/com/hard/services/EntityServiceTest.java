@@ -74,6 +74,33 @@ public class EntityServiceTest {
     }
 
     /**
+     * add
+     */
+
+    @Test
+    @DisplayName("add")
+    public void shouldAdd() {
+        int id = 11;
+        Entity entity = new Entity();
+
+        entity.setId(id);
+        entity.setTitle("Entity " + id);
+
+        entityService.add(entity);
+
+        Collection<Entity> entities = entityService.getAll();
+
+        assertEquals(count + 1, entities.size());
+
+        for (int i = 1; i <= count + 1; i++) {
+            entity = entityService.get(i);
+
+            assertEquals(i, entity.getId());
+            assertEquals("Entity " + i, entity.getTitle());
+        }
+    }
+
+    /**
      * update
      */
 
