@@ -8,12 +8,28 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/entities")
 public class EntityController {
-    private EntityService entityService = new EntityService();
+    private EntityService entityService;
+
+    public EntityController() {
+        Collection<Entity> entities = new ArrayList<>();
+
+        for (long i = 1; i <= 10; i++) {
+            Entity entity = new Entity();
+
+            entity.setId(i);
+            entity.setTitle("Entity " + i);
+
+            entities.add(entity);
+        }
+
+        entityService = new EntityService(entities);
+    }
 
     /**
      * get
@@ -43,7 +59,7 @@ public class EntityController {
     @GetMapping(value = "/{id}", produces = (MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8"))
     public ResponseEntity<Entity> getById(@PathVariable("id") long id) {
         HttpStatus httpStatus;
-        Entity entity = entityService.getById(id);
+        Entity entity = entityService.get(id);
 
         if (entity == null)
             httpStatus = HttpStatus.NOT_FOUND;
@@ -64,7 +80,7 @@ public class EntityController {
     @PostMapping("")
     public ResponseEntity<Entity> add(@RequestBody Entity entity) {
         HttpStatus httpStatus;
-        Entity e = entityService.getById(entity.getId());
+        Entity e = entityService.get(entity.getId());
 
         if (e != null) {
             httpStatus = HttpStatus.CONFLICT;
@@ -86,7 +102,7 @@ public class EntityController {
         HttpStatus httpStatus;
         boolean contains = false;
         for (Entity entity : entities) {
-            Entity e = entityService.getById(entity.getId());
+            Entity e = entityService.get(entity.getId());
 
             if (e != null) {
                 contains = true;
@@ -113,10 +129,10 @@ public class EntityController {
      * update
      */
 
-    @PutMapping("/{id}")// put || post
+    @PutMapping("/{id}")
     public ResponseEntity<Entity> update(@PathVariable("id") long id, @RequestBody Entity entity) {
         HttpStatus httpStatus;
-        Entity e = entityService.getById(id);
+        Entity e = entityService.get(id);
 
         if (e == null) {
             httpStatus = HttpStatus.NOT_FOUND;
@@ -129,6 +145,34 @@ public class EntityController {
         ResponseEntity responseEntity = ResponseEntity
                 .status(httpStatus)
                 .body(entity);
+
+        return responseEntity;
+    }
+
+    @PatchMapping("")
+    public ResponseEntity<Collection<Entity>> updateCollection(@RequestBody Collection<Entity> entities) {
+        HttpStatus httpStatus;
+        boolean contains = false;
+        for (Entity entity : entities) {
+            Entity e = entityService.get(entity.getId());
+
+            if (e != null) {
+                contains = true;
+//                break;
+            }
+        }
+
+        if (!contains) {
+            httpStatus = HttpStatus.NOT_FOUND;
+            entities = null;
+        } else {
+            httpStatus = HttpStatus.OK;
+            entityService.updateCollection(entities);
+        }
+
+        ResponseEntity responseEntity = ResponseEntity
+                .status(httpStatus)
+                .body(entities);
 
         return responseEntity;
     }
@@ -152,12 +196,12 @@ public class EntityController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") long id) {
         HttpStatus httpStatus;
-        Entity entity = entityService.getById(id);
+        Entity entity = entityService.get(id);
 
         if (entity == null)
             httpStatus = HttpStatus.NOT_FOUND;
         else {
-            entityService.deleteById(id);
+            entityService.delete(id);
             httpStatus = HttpStatus.NO_CONTENT;
         }
 
