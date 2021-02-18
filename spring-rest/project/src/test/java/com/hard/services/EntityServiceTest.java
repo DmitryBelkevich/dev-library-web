@@ -29,6 +29,10 @@ public class EntityServiceTest {
         }
     }
 
+    /**
+     * get
+     */
+
     @Test
     @DisplayName("getAll")
     public void shouldGetAll() {
@@ -49,23 +53,41 @@ public class EntityServiceTest {
     }
 
     @Test
-    @DisplayName("getById")
-    public void shouldGetById() {
-        Entity entity = entityService.getById(0);
+    @DisplayName("get")
+    public void shouldGet() {
+        Entity entity = entityService.get(0);
 
         assertNull(entity);
 
         for (int i = 1; i <= count; i++) {
-            entity = entityService.getById(i);
+            entity = entityService.get(i);
 
             assertEquals(i, entity.getId());
             assertEquals("Entity " + i, entity.getTitle());
         }
 
         for (int i = count + 1; i <= 100; i++) {
-            entity = entityService.getById(i);
+            entity = entityService.get(i);
 
             assertNull(entity);
         }
+    }
+
+    /**
+     * update
+     */
+
+    /**
+     * delete
+     */
+
+    @Test
+    @DisplayName("deleteAll")
+    public void shouldDeleteAll() {
+        entityService.deleteAll();
+
+        Collection<Entity> entities = entityService.getAll();
+
+        assertEquals(0, entities.size());
     }
 }
