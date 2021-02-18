@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -98,6 +99,12 @@ public class EntityServiceTest {
             assertEquals(i, entity.getId());
             assertEquals("Entity " + i, entity.getTitle());
         }
+    }
+
+    @Test
+    @DisplayName("addCollection")
+    public void shouldAddCollection() {
+
     }
 
     /**
