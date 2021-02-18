@@ -1,0 +1,22 @@
+plugins {
+    id 'war'
+}
+
+group 'com.hard'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junit_version = "5.+"
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:${junit_version}"
+}
+
+test {
+    useJUnitPlatform()
+}
