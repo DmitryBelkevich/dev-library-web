@@ -19,10 +19,16 @@ public class MainController {
 
     @GetMapping(value = "", produces = (MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8"))
     public ResponseEntity<Collection<Entity>> getAll() {
+        HttpStatus httpStatus;
         Collection<Entity> entities = entityService.getAll();
 
+        if (entities == null || entities.isEmpty())
+            httpStatus = HttpStatus.NO_CONTENT;
+        else
+            httpStatus = HttpStatus.OK;
+
         ResponseEntity responseEntity = ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .body(entities);
 
         return responseEntity;
