@@ -6,10 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -17,6 +14,10 @@ import java.util.Collection;
 @RequestMapping("/api/entities")
 public class MainController {
     private EntityService entityService = new EntityService();
+
+    /**
+     * get
+     */
 
     @GetMapping(value = "", produces = (MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8"))
     public ResponseEntity<Collection<Entity>> getAll() {
@@ -52,6 +53,41 @@ public class MainController {
         ResponseEntity responseEntity = ResponseEntity
                 .status(httpStatus)
                 .body(entity);
+
+        return responseEntity;
+    }
+
+    /**
+     * delete
+     */
+
+    @DeleteMapping("")
+    public ResponseEntity<Void> deleteAll() {
+        HttpStatus httpStatus = HttpStatus.NO_CONTENT;
+        entityService.deleteAll();
+
+        ResponseEntity responseEntity = ResponseEntity
+                .status(httpStatus)
+                .body(null);
+
+        return responseEntity;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") long id) {
+        HttpStatus httpStatus;
+        Entity entity = entityService.getById(id);
+
+        if (entity == null)
+            httpStatus = HttpStatus.NOT_FOUND;
+        else {
+            entityService.deleteById(id);
+            httpStatus = HttpStatus.NO_CONTENT;
+        }
+
+        ResponseEntity responseEntity = ResponseEntity
+                .status(httpStatus)
+                .body(null);
 
         return responseEntity;
     }

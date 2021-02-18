@@ -35,4 +35,18 @@ public class EntityService {
 
         return null;
     }
+
+    public void deleteById(long id) {
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+
+            if (entity.getId() == id)
+                entities.remove(entity);
+        }
+    }
+
+    public void deleteAll() {
+        entities.clear();
+    }
 }
