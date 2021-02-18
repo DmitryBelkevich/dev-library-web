@@ -10,7 +10,6 @@ public class EntityService {
     private Collection<Entity> entities = new ArrayList<>();
 
     public EntityService() {
-
     }
 
     public EntityService(Collection<Entity> entities) {
