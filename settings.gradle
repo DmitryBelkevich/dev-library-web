@@ -1,8 +1,8 @@
 rootProject.name = 'dev-library-web'
 
-include ":spring-mvc:init"
+include ":spring-mvc:spring-mvc-init"
 
-include ":spring-rest:init"
-include ":spring-rest:project"
+include ":spring-rest:spring-rest-init"
+include ":spring-rest:spring-rest-project"
 
 include ":object-relational-mapping"
