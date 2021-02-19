@@ -129,7 +129,7 @@ public class EntityController {
      * update
      */
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Entity> update(@PathVariable("id") long id, @RequestBody Entity entity) {
         HttpStatus httpStatus;
         Entity e = entityService.get(id);
@@ -149,8 +149,8 @@ public class EntityController {
         return responseEntity;
     }
 
-    @PatchMapping("")
-    public ResponseEntity<Collection<Entity>> updateCollection(@RequestBody Collection<Entity> entities) {
+    @PutMapping("/{ids}")
+    public ResponseEntity<Collection<Entity>> updateCollection(@PathVariable("ids") Collection<Long> ids, @RequestBody Collection<Entity> entities) {
         HttpStatus httpStatus;
         boolean contains = false;
         for (Entity entity : entities) {
@@ -167,7 +167,7 @@ public class EntityController {
             entities = null;
         } else {
             httpStatus = HttpStatus.OK;
-            entityService.updateCollection(entities);
+            entityService.updateCollection(ids, entities);
         }
 
         ResponseEntity responseEntity = ResponseEntity
