@@ -133,6 +133,12 @@ public class EntityServiceTest {
      * update
      */
 
+    @Test
+    @DisplayName("update")
+    public void shouldUpdate() {
+
+    }
+
     /**
      * delete
      */
