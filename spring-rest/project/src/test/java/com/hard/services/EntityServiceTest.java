@@ -104,7 +104,7 @@ public class EntityServiceTest {
     @Test
     @DisplayName("addCollection")
     public void shouldAddCollection() {
-        Collection<Entity> entities1 = new ArrayList();
+        Collection<Entity> entitiesTo = new ArrayList();
 
         for (int i = count + 1; i <= count * 2; i++) {
             Entity entity = new Entity();
@@ -112,10 +112,10 @@ public class EntityServiceTest {
             entity.setId(i);
             entity.setTitle("Entity " + i);
 
-            entities1.add(entity);
+            entitiesTo.add(entity);
         }
 
-        entityService.addCollection(entities1);
+        entityService.addCollection(entitiesTo);
 
         Collection<Entity> entities = entityService.getAll();
 
@@ -153,6 +153,28 @@ public class EntityServiceTest {
             assertEquals(count + i, entity.getId());
             assertEquals("Entity " + (count + i), entity.getTitle());
         }
+    }
+
+    @Test
+    @DisplayName("updateCollection")
+    public void shouldUpdateCollection() {
+        Collection<Long> ids = new ArrayList<>();
+        Collection<Entity> entitiesTo = new ArrayList<>();
+
+        for (long i = 1; i <= count; i++) {
+            Entity entity = new Entity();
+
+            entity.setId(count + i);
+            entity.setTitle("Entity " + (count + i));
+
+            ids.add(i);
+            entitiesTo.add(entity);
+        }
+
+        entityService.updateCollection(ids, entitiesTo);
+
+        Collection<Entity> entities = entityService.getAll();
+        assertEquals(count, entities.size());
     }
 
     /**
