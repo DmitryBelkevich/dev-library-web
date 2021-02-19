@@ -145,6 +145,10 @@ public class EntityServiceTest {
 
         Collection<Entity> entities = entityService.getAll();
         assertEquals(count, entities.size());
+
+        entity = entityService.get(count + 1);
+        assertEquals(count + 1, entity.getId());
+        assertEquals("Entity " + (count + 1), entity.getTitle());
     }
 
     /**
