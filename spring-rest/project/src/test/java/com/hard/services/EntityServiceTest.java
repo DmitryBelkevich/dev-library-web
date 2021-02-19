@@ -81,7 +81,7 @@ public class EntityServiceTest {
     @Test
     @DisplayName("add")
     public void shouldAdd() {
-        int id = 11;
+        int id = count + 1;
         Entity entity = new Entity();
 
         entity.setId(id);
@@ -136,19 +136,23 @@ public class EntityServiceTest {
     @Test
     @DisplayName("update")
     public void shouldUpdate() {
-        Entity entity = new Entity();
+        for (int i = 1; i <= count; i++) {
+            Entity entity = new Entity();
 
-        entity.setId(count + 1);
-        entity.setTitle("Entity " + (count + 1));
+            entity.setId(count + i);
+            entity.setTitle("Entity " + (count + i));
 
-        entityService.update(1, entity);
+            entityService.update(i, entity);
+        }
 
         Collection<Entity> entities = entityService.getAll();
         assertEquals(count, entities.size());
 
-        entity = entityService.get(count + 1);
-        assertEquals(count + 1, entity.getId());
-        assertEquals("Entity " + (count + 1), entity.getTitle());
+        for (int i = 1; i <= count; i++) {
+            Entity entity = entityService.get(count + i);
+            assertEquals(count + i, entity.getId());
+            assertEquals("Entity " + (count + i), entity.getTitle());
+        }
     }
 
     /**
@@ -173,7 +177,7 @@ public class EntityServiceTest {
 
         Collection<Entity> entities = entityService.getAll();
 
-        assertEquals(10, entities.size());
+        assertEquals(count, entities.size());
     }
 
     @Test
@@ -184,7 +188,7 @@ public class EntityServiceTest {
 
         Collection<Entity> entities = entityService.getAll();
 
-        assertEquals(9, entities.size());
+        assertEquals(count - 1, entities.size());
 
         Entity entity;
         for (int i = 1; i <= 4; i++) {
