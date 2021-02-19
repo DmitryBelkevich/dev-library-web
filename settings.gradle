@@ -5,6 +5,7 @@ include ":spring-rest:spring-rest-project"
 
 include ":spring-mvc:spring-mvc-init-AbstractAnnotationConfigDispatcherServletInitializer"
 include ":spring-mvc:spring-mvc-init-WebApplicationInitializer"
+include ":spring-mvc:spring-mvc-init-xml"
 
 include ":spring-boot:spring-boot-init"
 
