@@ -10,10 +10,15 @@ repositories {
 }
 
 ext {
+    hibernate_version = "5.+"
+
     junit_version = "5.+"
 }
 
 dependencies {
+    // hibernate
+    implementation "org.hibernate:hibernate-core:${hibernate_version}"
+
     testImplementation "org.junit.jupiter:junit-jupiter:${junit_version}"
 }
 

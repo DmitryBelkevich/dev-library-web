@@ -9,4 +9,4 @@ include ":spring-mvc:spring-mvc-init-xml"
 
 include ":spring-boot:spring-boot-init"
 
-include ":object-relational-mapping"
+include ":object-relational-mapping:hibernate"
