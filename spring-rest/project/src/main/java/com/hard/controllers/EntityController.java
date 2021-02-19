@@ -100,19 +100,23 @@ public class EntityController {
     @PutMapping("")
     public ResponseEntity<Entity> addCollection(@RequestBody Collection<Entity> entities) {
         HttpStatus httpStatus;
-        boolean contains = false;
+
+        Collection<Entity> entitiesTo = new ArrayList<>();
+
         for (Entity entity : entities) {
             Entity e = entityService.get(entity.getId());
 
-            if (e != null) {
-                contains = true;
-                break;
-            }
+            if (e != null)
+                continue;
+
+            entitiesTo.add(entity);
         }
 
-        if (contains) {
+        if (entitiesTo.size() == 0) {
+            httpStatus = HttpStatus.NO_CONTENT;
+        } else if (entitiesTo.size() < entities.size()) {
             httpStatus = HttpStatus.CONFLICT;
-            entities = null;
+            entityService.addCollection(entitiesTo);
         } else {
             httpStatus = HttpStatus.CREATED;
             entityService.addCollection(entities);
@@ -120,7 +124,7 @@ public class EntityController {
 
         ResponseEntity responseEntity = ResponseEntity
                 .status(httpStatus)
-                .body(entities);
+                .body(entitiesTo);
 
         return responseEntity;
     }
@@ -158,7 +162,7 @@ public class EntityController {
 
             if (e != null) {
                 contains = true;
-//                break;
+                break;
             }
         }
 
