@@ -106,16 +106,14 @@ public class EntityController {
         for (Entity entity : entities) {
             Entity e = entityService.get(entity.getId());
 
-            if (e != null)
-                continue;
-
-            entitiesTo.add(entity);
+            if (e == null)
+                entitiesTo.add(entity);
         }
 
         if (entitiesTo.size() == 0) {
             httpStatus = HttpStatus.NO_CONTENT;
         } else if (entitiesTo.size() < entities.size()) {
-            httpStatus = HttpStatus.CONFLICT;
+            httpStatus = HttpStatus.PARTIAL_CONTENT;
             entityService.addCollection(entitiesTo);
         } else {
             httpStatus = HttpStatus.CREATED;
@@ -156,19 +154,21 @@ public class EntityController {
     @PutMapping("/{ids}")
     public ResponseEntity<Collection<Entity>> updateCollection(@PathVariable("ids") Collection<Long> ids, @RequestBody Collection<Entity> entities) {
         HttpStatus httpStatus;
-        boolean contains = false;
+
+        Collection<Entity> entitiesTo = new ArrayList<>();
+
         for (Entity entity : entities) {
             Entity e = entityService.get(entity.getId());
 
-            if (e != null) {
-                contains = true;
-                break;
-            }
+            if (e != null)
+                entitiesTo.add(entity);
         }
 
-        if (!contains) {
+        if (entitiesTo.size() == 0) {
             httpStatus = HttpStatus.NOT_FOUND;
-            entities = null;
+        } else if (entitiesTo.size() < entities.size()) {
+            httpStatus = HttpStatus.PARTIAL_CONTENT;
+            entityService.updateCollection(null, entitiesTo);
         } else {
             httpStatus = HttpStatus.OK;
             entityService.updateCollection(ids, entities);
@@ -176,7 +176,7 @@ public class EntityController {
 
         ResponseEntity responseEntity = ResponseEntity
                 .status(httpStatus)
-                .body(entities);
+                .body(entitiesTo);
 
         return responseEntity;
     }
