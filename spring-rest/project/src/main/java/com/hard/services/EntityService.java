@@ -2,9 +2,9 @@ package com.hard.services;
 
 import com.hard.models.Entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class EntityService {
     private Collection<Entity> entities = new ArrayList<>();
@@ -58,12 +58,20 @@ public class EntityService {
         }
     }
 
-    public void updateCollection(Collection<Entity> entities) {
-        Iterator<Entity> iterator = entities.iterator();
-        while (iterator.hasNext()) {
-            Entity entity = iterator.next();
+    public void updateCollection(Collection<Long> ids, Collection<Entity> entities) {
+        Iterator<Long> idIterator = ids.iterator();
+        Iterator<Entity> entityIterator = entities.iterator();
+        Map<Long, Entity> idsEntities = IntStream.range(0, ids.size()).boxed()
+                .collect(Collectors.toMap(_i -> idIterator.next(), _i -> entityIterator.next()));
 
-            // TODO
+        Iterator<Map.Entry<Long, Entity>> iterator = idsEntities.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Long, Entity> idEntity = iterator.next();
+
+            long id = idEntity.getKey();
+            Entity entity = idEntity.getValue();
+
+            update(id, entity);
         }
     }
 
