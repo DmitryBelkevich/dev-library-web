@@ -3,8 +3,8 @@ rootProject.name = 'dev-library-web'
 include ":spring-rest:spring-rest-init"
 include ":spring-rest:spring-rest-project"
 
-include ":spring-mvc:spring-mvc-init-1"
-include ":spring-mvc:spring-mvc-init-2"
+include ":spring-mvc:spring-mvc-init-AbstractAnnotationConfigDispatcherServletInitializer"
+include ":spring-mvc:spring-mvc-init-WebApplicationInitializer"
 
 include ":spring-boot:spring-boot-init"
 
