@@ -48,7 +48,9 @@ public class EntityService {
             if (e.getId() == id) {
                 entities.remove(e);
 
-                entity.setId(id);
+                if (entity.getId() == 0)
+                    entity.setId(id);
+
                 entities.add(entity);
 
                 break;

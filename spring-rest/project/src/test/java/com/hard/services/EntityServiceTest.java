@@ -136,7 +136,15 @@ public class EntityServiceTest {
     @Test
     @DisplayName("update")
     public void shouldUpdate() {
+        Entity entity = new Entity();
 
+        entity.setId(count + 1);
+        entity.setTitle("Entity " + (count + 1));
+
+        entityService.update(1, entity);
+
+        Collection<Entity> entities = entityService.getAll();
+        assertEquals(count, entities.size());
     }
 
     /**
