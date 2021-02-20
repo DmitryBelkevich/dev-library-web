@@ -1,12 +1,12 @@
 rootProject.name = 'dev-library-web'
 
-include ":spring-rest:spring-rest-init"
-include ":spring-rest:spring-rest-project"
+include ":springframework:spring-rest:spring-rest-init"
+include ":springframework:spring-rest:spring-rest-project"
 
-include ":spring-mvc:spring-mvc-init-AbstractAnnotationConfigDispatcherServletInitializer"
-include ":spring-mvc:spring-mvc-init-WebApplicationInitializer"
-include ":spring-mvc:spring-mvc-init-xml"
+include ":springframework:spring-mvc:spring-mvc-init-AbstractAnnotationConfigDispatcherServletInitializer"
+include ":springframework:spring-mvc:spring-mvc-init-WebApplicationInitializer"
+include ":springframework:spring-mvc:spring-mvc-init-xml"
 
-include ":spring-boot:spring-boot-init"
+include ":springframework:spring-boot:spring-boot-init"
 
 include ":object-relational-mapping:hibernate:hibernate-init"
