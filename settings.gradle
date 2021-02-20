@@ -10,3 +10,4 @@ include ":springframework:spring-mvc:spring-mvc-init-xml"
 include ":springframework:spring-boot:spring-boot-init"
 
 include ":object-relational-mapping:hibernate:hibernate-init"
+include ":object-relational-mapping:hibernate:hibernate-settings"
