@@ -7,7 +7,7 @@
 
     <class name="XmlEntity" table="xml_entities">
 
-        <id name="id" type="int" column="id">
+        <id name="id" type="long" column="id">
             <generator class="increment"/>
         </id>
 
