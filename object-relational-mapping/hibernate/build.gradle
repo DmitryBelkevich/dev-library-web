@@ -11,6 +11,7 @@ repositories {
 
 ext {
     hibernate_version = "5.+"
+    postgresql_version = "42.+"
 
     junit_version = "5.+"
 }
@@ -18,6 +19,10 @@ ext {
 dependencies {
     // hibernate
     implementation "org.hibernate:hibernate-core:${hibernate_version}"
+
+    // postgresql
+    implementation "org.postgresql:postgresql:${postgresql_version}"
+
 
     testImplementation "org.junit.jupiter:junit-jupiter:${junit_version}"
 }
