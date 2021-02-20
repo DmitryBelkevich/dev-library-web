@@ -6,8 +6,8 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     public static void main(String[] args) {
         Configuration configuration = new Configuration()
-//                .addResource("xml_entity.hbm.xml")
-//                .addAnnotatedClass(AnnotatedEntity.class)
+//                .addResource("entity1.hbm.xml")
+//                .addAnnotatedClass(Entity2.class)
                 .configure();
 
         SessionFactory sessionFactory = configuration

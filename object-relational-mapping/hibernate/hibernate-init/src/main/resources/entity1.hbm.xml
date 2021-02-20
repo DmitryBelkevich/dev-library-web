@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="com.hard.models">
 
-    <class name="XmlEntity" table="xml_entities">
+    <class name="Entity1" table="entities1">
 
         <id name="id" type="long" column="id">
             <generator class="increment"/>

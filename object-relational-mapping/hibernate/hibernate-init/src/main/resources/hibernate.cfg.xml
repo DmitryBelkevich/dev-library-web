@@ -27,8 +27,8 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapping files -->
-        <mapping resource="xml_entity.hbm.xml"/>
-        <mapping class="com.hard.models.AnnotatedEntity"/>
+        <mapping resource="entity1.hbm.xml"/>
+        <mapping class="com.hard.models.Entity2"/>
 
     </session-factory>
 </hibernate-configuration>
