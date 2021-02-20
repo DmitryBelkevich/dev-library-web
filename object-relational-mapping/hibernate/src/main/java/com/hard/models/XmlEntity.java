@@ -1,6 +1,6 @@
 package com.hard.models;
 
-public class Product {
+public class XmlEntity {
     private long id;
     private String title;
 

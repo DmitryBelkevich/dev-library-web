@@ -23,7 +23,6 @@ dependencies {
     // postgresql
     implementation "org.postgresql:postgresql:${postgresql_version}"
 
-
     testImplementation "org.junit.jupiter:junit-jupiter:${junit_version}"
 }
 
